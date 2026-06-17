@@ -56,7 +56,7 @@ class _TristateSwitchState extends State<TristateSwitch> {
         shape: CircleBorder(),
         color: isHovered
             ? const Color.fromARGB(103, 104, 104, 104)
-            : Colors.transparent,
+            : Colors.red,
       ),
       child: SizedBox.expand(
         child: Container(

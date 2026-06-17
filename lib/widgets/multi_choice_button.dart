@@ -34,7 +34,7 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
   @override
   void setState(VoidCallback fn) {
     super.setState(fn);
-    widget.onChanged(items[selectedIndex].value);
+    widget.onChanged(selectedIndex);
   }
 
   @override
@@ -71,7 +71,6 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
 }
 
 class MultiChoiceButtonItem {
-  MultiChoiceButtonItem({this.child, required this.value});
+  MultiChoiceButtonItem({this.child});
   final Widget? child;
-  final int value;
 }

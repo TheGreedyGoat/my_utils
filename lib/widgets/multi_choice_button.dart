@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MultiChoiceButton extends StatefulWidget {
   const MultiChoiceButton({
-    required this.onChanged,
+    this.onChanged,
     required this.items,
     this.selectedBackgroundColor,
     this.unselectedBackgroundColor,

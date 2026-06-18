@@ -6,9 +6,11 @@ class ProcessIndicatorDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 50.0,
-      height: 50.0,
-      child: const CircularProgressIndicator(),
+      width: size,
+      child: const AspectRatio(
+        aspectRatio: 1.0,
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

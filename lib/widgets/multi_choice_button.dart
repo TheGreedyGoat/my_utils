@@ -16,7 +16,7 @@ class MultiChoiceButton extends StatefulWidget {
   final Color? unselectedForegroundColor;
   final Color? selectedForegroundColor;
 
-  final void Function(int value) onChanged;
+  final void Function(int value)? onChanged;
 
   @override
   State<MultiChoiceButton> createState() => _MultiChoiceButtonState();
@@ -34,7 +34,7 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
   @override
   void setState(VoidCallback fn) {
     super.setState(fn);
-    widget.onChanged(selectedIndex);
+    widget.onChanged?.call(selectedIndex);
   }
 
   @override
@@ -46,6 +46,7 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
               onPressed: () {
                 setState(() {
                   selectedIndex = items.indexOf(item);
+                  item.onSelected?.call();
                 });
               },
               style: OutlinedButton.styleFrom(
@@ -71,6 +72,7 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
 }
 
 class MultiChoiceButtonItem {
-  MultiChoiceButtonItem({this.child});
+  MultiChoiceButtonItem({this.child, this.onSelected});
   final Widget? child;
+  final void Function()? onSelected;
 }

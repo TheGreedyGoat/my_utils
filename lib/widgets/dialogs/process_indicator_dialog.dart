@@ -24,18 +24,24 @@ class ProcessIndicatorDialogWidget extends StatelessWidget {
   }
 }
 
-Dialog processIndicatorDialog(double dialogSize) =>
-    Dialog(child: ProcessIndicatorDialogWidget(dialogSize: dialogSize));
-
 Future<void> showProcessIndicatorDialaog(
-  double dialogSize,
   BuildContext context,
+  double dialogSize,
+  double indicatorSizePercentage,
   Future<void> close,
 ) async {
   showDialog(
     barrierDismissible: false,
     context: context,
-    builder: (context) => processIndicatorDialog(dialogSize),
+    builder: (context) => Dialog(
+      child: ProcessIndicatorDialogWidget(
+        dialogSize: dialogSize,
+        indicatorSizePercentage:
+            (indicatorSizePercentage > 0 && indicatorSizePercentage < 1)
+            ? indicatorSizePercentage
+            : 0.5,
+      ),
+    ),
   );
 
   await close;

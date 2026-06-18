@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ProcessIndicatorDialogWidget extends StatelessWidget {
-  const ProcessIndicatorDialogWidget({
-    required this.dialogSize,
-    this.indicatorSizePercentage = 0.5,
-    super.key,
-  });
+  const ProcessIndicatorDialogWidget({required this.dialogSize, super.key});
   final double dialogSize;
-  final double indicatorSizePercentage;
   @override
   Widget build(BuildContext context) {
-    assert(indicatorSizePercentage < 1, 'value hast to be from (0, 1)');
     return SizedBox(
       width: dialogSize,
-      child: Padding(
-        padding: EdgeInsets.all(dialogSize * indicatorSizePercentage),
-        child: const AspectRatio(
+      child: const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: AspectRatio(
           aspectRatio: 1.0,
           child: CircularProgressIndicator(),
         ),
@@ -27,21 +21,13 @@ class ProcessIndicatorDialogWidget extends StatelessWidget {
 Future<void> showProcessIndicatorDialaog(
   BuildContext context,
   double dialogSize,
-  double indicatorSizePercentage,
   Future<void> close,
 ) async {
   showDialog(
     barrierDismissible: false,
     context: context,
-    builder: (context) => Dialog(
-      child: ProcessIndicatorDialogWidget(
-        dialogSize: dialogSize,
-        indicatorSizePercentage:
-            (indicatorSizePercentage > 0 && indicatorSizePercentage < 1)
-            ? indicatorSizePercentage
-            : 0.5,
-      ),
-    ),
+    builder: (context) =>
+        Dialog(child: ProcessIndicatorDialogWidget(dialogSize: dialogSize)),
   );
 
   await close;

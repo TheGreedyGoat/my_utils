@@ -5,9 +5,12 @@ class ProcessIndicatorDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: const CircularProgressIndicator(),
+    return AspectRatio(
+      aspectRatio: 1.0,
+      child: Container(
+        color: Colors.red,
+        child: const CircularProgressIndicator(),
+      ),
     );
   }
 }

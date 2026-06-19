@@ -63,11 +63,15 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
                   ),
                 ),
                 backgroundColor: items.indexOf(item) == selectedIndex
-                    ? widget.selectedBackgroundColor ?? Colors.black
-                    : widget.unselectedBackgroundColor ?? Colors.white,
+                    ? widget.selectedBackgroundColor ??
+                          Theme.of(context).colorScheme.primary
+                    : widget.unselectedBackgroundColor ??
+                          Theme.of(context).colorScheme.onPrimary,
                 foregroundColor: items.indexOf(item) == selectedIndex
-                    ? widget.selectedForegroundColor ?? Colors.white
-                    : widget.selectedForegroundColor ?? Colors.black,
+                    ? widget.selectedForegroundColor ??
+                          Theme.of(context).colorScheme.onSecondary
+                    : widget.selectedForegroundColor ??
+                          Theme.of(context).colorScheme.secondary,
               ),
               child: item.child,
             ),

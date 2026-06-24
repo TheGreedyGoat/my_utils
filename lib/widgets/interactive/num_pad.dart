@@ -17,12 +17,33 @@ class _NumPadState extends State<NumPad> {
         for (int i = 1; i <= 9; i++)
           UniButton(
             buttonPreset: widget.preset,
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
               print(i);
             },
             child: Text(i.toString()),
           ),
+
+        UniButton(
+          buttonPreset: widget.preset,
+          onPressed: () {
+            print('confirm');
+          },
+          child: Icon(Icons.send_sharp),
+        ),
+        UniButton(
+          buttonPreset: widget.preset,
+          onPressed: () {
+            print('0');
+          },
+          child: Text(0.toString()),
+        ),
+        UniButton(
+          buttonPreset: widget.preset,
+          onPressed: () {
+            print('delete');
+          },
+          child: Icon(Icons.backspace_sharp),
+        ),
       ],
     );
   }

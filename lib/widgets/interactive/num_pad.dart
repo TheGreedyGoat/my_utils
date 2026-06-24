@@ -14,41 +14,47 @@ class _NumPadState extends State<NumPad> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(child: Text(value)),
-        GridView.count(
-          crossAxisCount: 3,
-          children: [
-            for (int i = 1; i <= 9; i++)
+        SizedBox(
+          height: 20,
+          width: double.infinity,
+          child: Container(child: Text(value)),
+        ),
+        Expanded(
+          child: GridView.count(
+            crossAxisCount: 3,
+            children: [
+              for (int i = 1; i <= 9; i++)
+                UniButton(
+                  buttonPreset: widget.preset,
+                  onPressed: () {
+                    value += i.toString();
+                  },
+                  child: Text(i.toString()),
+                ),
+
               UniButton(
                 buttonPreset: widget.preset,
                 onPressed: () {
-                  value += i.toString();
+                  print('confirm');
                 },
-                child: Text(i.toString()),
+                child: Icon(Icons.send_sharp),
               ),
-
-            UniButton(
-              buttonPreset: widget.preset,
-              onPressed: () {
-                print('confirm');
-              },
-              child: Icon(Icons.send_sharp),
-            ),
-            UniButton(
-              buttonPreset: widget.preset,
-              onPressed: () {
-                print('0');
-              },
-              child: Text(0.toString()),
-            ),
-            UniButton(
-              buttonPreset: widget.preset,
-              onPressed: () {
-                value.replaceRange(value.length - 1, null, '');
-              },
-              child: Icon(Icons.backspace_sharp),
-            ),
-          ],
+              UniButton(
+                buttonPreset: widget.preset,
+                onPressed: () {
+                  print('0');
+                },
+                child: Text(0.toString()),
+              ),
+              UniButton(
+                buttonPreset: widget.preset,
+                onPressed: () {
+                  value.replaceRange(value.length - 1, null, '');
+                },
+                child: Icon(Icons.backspace_sharp),
+              ),
+            ],
+          ),
         ),
       ],
     );

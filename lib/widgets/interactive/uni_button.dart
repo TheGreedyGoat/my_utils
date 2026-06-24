@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class UniButton extends StatelessWidget {
+class UniButton extends StatefulWidget {
   const UniButton({
     required this.buttonPreset,
     required this.onPressed,
@@ -27,37 +27,46 @@ class UniButton extends StatelessWidget {
   final bool autofocus;
 
   @override
+  State<UniButton> createState() => _UniButtonState();
+}
+
+class _UniButtonState extends State<UniButton> {
+  @override
   Widget build(BuildContext context) {
     return _buildButton();
   }
 
-  Widget _buildButton() => switch (buttonPreset) {
+  Widget _buildButton() => switch (widget.buttonPreset) {
     ButtonPreset.elevated => ElevatedButton(
-      onPressed: onPressed,
-      child: child,
-      onLongPress: onLongPress,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
+      onPressed: widget.onPressed,
+      onLongPress: widget.onLongPress,
+      onHover: widget.onHover,
+      onFocusChange: widget.onFocusChange,
+      style: widget.style,
+      child: widget.child,
     ),
     ButtonPreset.outlined => OutlinedButton(
-      onPressed: onPressed,
-      child: child,
-      onLongPress: onLongPress,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
+      onPressed: widget.onPressed,
+      onLongPress: widget.onLongPress,
+      onHover: widget.onHover,
+      onFocusChange: widget.onFocusChange,
+      style: widget.style,
+      child: widget.child,
     ),
     ButtonPreset.text => TextButton(
-      onPressed: onPressed,
-      child: child,
-      onLongPress: onLongPress,
-      onHover: onHover,
-      onFocusChange: onFocusChange,
+      onPressed: widget.onPressed,
+      onLongPress: widget.onLongPress,
+      onHover: widget.onHover,
+      onFocusChange: widget.onFocusChange,
+      style: widget.style,
+      child: widget.child,
     ),
     ButtonPreset.icon => IconButton(
-      onPressed: onPressed,
-      icon: child,
-      onLongPress: onLongPress,
-      onHover: onHover,
+      onPressed: widget.onPressed,
+      onLongPress: widget.onLongPress,
+      onHover: widget.onHover,
+      style: widget.style,
+      icon: widget.child,
     ),
   };
 }

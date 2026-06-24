@@ -17,6 +17,7 @@ class _NumPadState extends State<NumPad> {
         for (int i = 1; i <= 9; i++)
           UniButton(
             buttonPreset: widget.preset,
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
               print(i);
             },

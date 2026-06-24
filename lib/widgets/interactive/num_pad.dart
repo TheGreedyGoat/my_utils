@@ -27,7 +27,9 @@ class _NumPadState extends State<NumPad> {
                 UniButton(
                   buttonPreset: widget.preset,
                   onPressed: () {
-                    value += i.toString();
+                    setState(() {
+                      value += i.toString();
+                    });
                   },
                   child: Text(i.toString()),
                 ),
@@ -35,21 +37,27 @@ class _NumPadState extends State<NumPad> {
               UniButton(
                 buttonPreset: widget.preset,
                 onPressed: () {
-                  print('confirm');
+                  setState(() {
+                    print('confirm');
+                  });
                 },
                 child: Icon(Icons.send_sharp),
               ),
               UniButton(
                 buttonPreset: widget.preset,
                 onPressed: () {
-                  print('0');
+                  setState(() {
+                    print('0');
+                  });
                 },
                 child: Text(0.toString()),
               ),
               UniButton(
                 buttonPreset: widget.preset,
                 onPressed: () {
-                  value.replaceRange(value.length - 1, null, '');
+                  setState(() {
+                    value.replaceRange(value.length - 1, null, '');
+                  });
                 },
                 child: Icon(Icons.backspace_sharp),
               ),

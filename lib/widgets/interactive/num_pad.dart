@@ -56,7 +56,9 @@ class _NumPadState extends State<NumPad> {
                 buttonPreset: widget.preset,
                 onPressed: () {
                   setState(() {
-                    value.replaceRange(value.length - 1, null, '');
+                    if (value.isNotEmpty) {
+                      value = value.substring(0, value.length - 1);
+                    }
                   });
                 },
                 child: Icon(Icons.backspace_sharp),

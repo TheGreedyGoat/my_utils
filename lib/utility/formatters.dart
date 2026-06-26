@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 
 class Formatters {
+  const Formatters._();
   static RegExp doubleInputRegExp(int fractionDigits) =>
       RegExp(r'^\d+[.,]?\d{0,#}|^$'.replaceAll('#', fractionDigits.toString()));
 

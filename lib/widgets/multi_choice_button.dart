@@ -9,6 +9,7 @@ class MultiChoiceButton extends StatefulWidget {
     this.unselectedBackgroundColor,
     this.unselectedForegroundColor,
     this.selectedForegroundColor,
+    this.itemPadding,
     super.key,
   });
 
@@ -18,6 +19,7 @@ class MultiChoiceButton extends StatefulWidget {
   final Color? selectedBackgroundColor;
   final Color? unselectedForegroundColor;
   final Color? selectedForegroundColor;
+  final EdgeInsetsGeometry? itemPadding;
 
   final void Function(int value)? onChanged;
 
@@ -56,6 +58,7 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
                 });
               },
               style: OutlinedButton.styleFrom(
+                padding: widget.itemPadding,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadiusGeometry.horizontal(
                     start: items.first == item ? Radius.circular(100) : null,

@@ -68,4 +68,6 @@ extension DateTimeExtensions on DateTime {
       isBefore(other) || isAtSameMomentAs(other);
   bool isAfterOrSame(DateTime other) =>
       isAfter(other) || isAtSameMomentAs(other);
+
+  DateTime dateOnly() => DateTime(this.year, this.month, this.day);
 }

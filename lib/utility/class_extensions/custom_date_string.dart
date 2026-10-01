@@ -1,7 +1,7 @@
 import 'dart:math';
 
 /// A few extra toStrings for [DateTime]s
-extension CustomDateString on DateTime {
+extension DateTimeExtensions on DateTime {
   /// Pass a pattern to get any numeric date format.
   ///
   /// A pattern could for example look like this:
@@ -63,4 +63,9 @@ extension CustomDateString on DateTime {
 
     return pattern;
   }
+
+  bool isBeforeOrSame(DateTime other) =>
+      isBefore(other) || isAtSameMomentAs(other);
+  bool isAfterOrSame(DateTime other) =>
+      isAfter(other) || isAtSameMomentAs(other);
 }

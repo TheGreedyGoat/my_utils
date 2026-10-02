@@ -33,8 +33,11 @@ extension DateTimeExtensions on DateTime {
   ///
   /// TODO: add support for milli- and microseconds, weekdays and month names
   String toDynamicString(String pattern) {
-    pattern.replaceAll('~WD', weekdayNameEnglish);
-    pattern.replaceAll('~wd', weekdayNameEnglish.substring(0, 3).toUpperCase());
+    pattern = pattern.replaceAll('~WD', weekdayNameEnglish);
+    pattern = pattern.replaceAll(
+      '~wd',
+      weekdayNameEnglish.substring(0, 3).toUpperCase(),
+    );
     pattern = _replacePattern(pattern, char: 'D', replace: day.toString());
     pattern = _replacePattern(pattern, char: 'M', replace: month.toString());
     pattern = _replacePattern(pattern, char: 'Y', replace: year.toString());

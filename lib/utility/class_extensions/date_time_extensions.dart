@@ -87,4 +87,8 @@ extension DateTimeExtensions on DateTime {
       isAfter(other) || isAtSameMomentAs(other);
 
   DateTime dateOnly() => DateTime(this.year, this.month, this.day);
+
+  DateTime nextWeekday(int weekday) {
+    return this.add(Duration(days: (weekday - this.weekday + 7) % 7));
+  }
 }

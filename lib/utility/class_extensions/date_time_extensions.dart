@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:my_utils/utility/enums/weekdays.dart';
+
 /// A few extra toStrings for [DateTime]s
 extension DateTimeExtensions on DateTime {
   /// Pass a pattern to get any numeric date format.
@@ -24,8 +26,15 @@ extension DateTimeExtensions on DateTime {
   ///
   /// numbers with more digits that the pattern will be cut off, eg with \~YY and the year 2026 we get 26
   ///
+  /// To display weekdays, use ~WD or ~wd. Upper case inserts the full name, lower case unly th first three chars in Caps eg
+  ///
+  /// ~WD => Monday
+  /// ~wd => MON
+  ///
   /// TODO: add support for milli- and microseconds, weekdays and month names
   String toDynamicString(String pattern) {
+    pattern.replaceAll('~WD', weekdayNameEnglish);
+    pattern.replaceAll('~wd', weekdayNameEnglish.substring(0, 3).toUpperCase());
     pattern = _replacePattern(pattern, char: 'D', replace: day.toString());
     pattern = _replacePattern(pattern, char: 'M', replace: month.toString());
     pattern = _replacePattern(pattern, char: 'Y', replace: year.toString());
@@ -62,6 +71,11 @@ extension DateTimeExtensions on DateTime {
     }
 
     return pattern;
+  }
+
+  String get weekdayNameEnglish {
+    var result = Weekday.values[weekday - 1].toString().split('.')[1];
+    return result.replaceFirst(result[0], result[0].toUpperCase());
   }
 
   bool isBeforeOrSame(DateTime other) =>

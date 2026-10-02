@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:my_utils/utility/class_extensions/custom_date_string.dart';
+import 'package:my_utils/utility/class_extensions/date_time_extensions.dart';
 
 /// My attempt to get a unified logger system
 ///
@@ -11,21 +11,16 @@ class Logger {
   final String _method;
   final bool _isActive;
   String get _prefix =>
-      '[$_objectType.$_method] ${DateTime.now().toDynamicString(
-        '~MM.~DD.~YY ~hh:~mm:~ss',
-      )}';
+      '[$_objectType.$_method] ${DateTime.now().toDynamicString('~MM.~DD.~YY ~hh:~mm:~ss')}';
 
   /// My attempt to get a unified logger system
   ///
   /// [objectType] and [method]
   ///
-  Logger(
-    Type objectType,
-    String method, [
-    bool isActive = true,
-  ]) : _objectType = objectType,
-       _method = method,
-       _isActive = isActive;
+  Logger(Type objectType, String method, [bool isActive = true])
+    : _objectType = objectType,
+      _method = method,
+      _isActive = isActive;
 
   void _print(String text, int level) {
     final String message =

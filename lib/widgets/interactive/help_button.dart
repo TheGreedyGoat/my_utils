@@ -10,6 +10,7 @@ class HelpButton extends StatelessWidget {
     return SizedBox.square(
       dimension: size,
       child: PopupMenuButton(
+        offset: Offset(size + 2, 0),
         itemBuilder: (context) {
           return [
             PopupMenuItem(

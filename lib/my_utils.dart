@@ -6,3 +6,4 @@ export 'widgets/dialogs/process_indicator_dialog.dart';
 export 'widgets/widget_functionality/conditional_wrapper.dart';
 export 'utility/formatters.dart';
 export 'utility/money_converter.dart';
+export 'utility/class_extensions/date_time_extensions.dart';

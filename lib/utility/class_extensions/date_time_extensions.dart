@@ -105,4 +105,31 @@ extension DateTimeExtensions on DateTime {
   DateTime lastWeekDay(int weekday) {
     return this.subtract(Duration(days: (this.weekday - weekday + 7) % 7));
   }
+
+  /// returns, how many days this date's month has
+  int get daysOfMonth {
+    switch (this.month) {
+      case 1:
+      case 3:
+      case 5:
+      case 7:
+      case 8:
+      case 10:
+      case 12:
+        return 31;
+      case 2:
+        return this.year % 4 == 0 &&
+                (this.year % 100 != 0 || this.year % 400 == 0)
+            ? 29
+            : 28;
+      default:
+        return 30;
+    }
+  }
+
+  int get daysOfYear {
+    return this.year % 4 == 0 && (this.year % 100 != 0 || this.year % 400 == 0)
+        ? 364
+        : 365;
+  }
 }

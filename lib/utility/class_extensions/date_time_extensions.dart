@@ -101,4 +101,8 @@ extension DateTimeExtensions on DateTime {
   DateTime nextWeekday(int weekday) {
     return this.add(Duration(days: (weekday - this.weekday + 7) % 7));
   }
+
+  DateTime lastWeekDay(int weekday) {
+    return this.subtract(Duration(days: (this.weekday - weekday + 7) % 7));
+  }
 }

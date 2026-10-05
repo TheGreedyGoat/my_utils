@@ -27,5 +27,29 @@ void main() {
         );
       },
     );
+    test(
+      'Finding the last monday for a whole week works properly',
+      () {
+        final results = List<DateTime>.empty(growable: true);
+        for (int i = 0; i < 7; i++) {
+          results.add(
+            DateTime(2026, 10, 12).subtract(Duration(days: i)).lastWeekDay(1),
+          );
+        }
+        final expected = equals([
+          DateTime(2026, 10, 12),
+          DateTime(2026, 10, 5),
+          DateTime(2026, 10, 5),
+          DateTime(2026, 10, 5),
+          DateTime(2026, 10, 5),
+          DateTime(2026, 10, 5),
+          DateTime(2026, 10, 5),
+        ]);
+        expect(
+          results,
+          expected,
+        );
+      },
+    );
   });
 }

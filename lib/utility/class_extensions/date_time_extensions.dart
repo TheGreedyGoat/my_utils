@@ -1,9 +1,19 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 import 'package:my_utils/utility/enums/weekdays.dart';
 
 /// A few extra toStrings for [DateTime]s
 extension DateTimeExtensions on DateTime {
+  /// Returns the earlier date
+  static DateTime min(DateTime a, DateTime b) {
+    return a.isBefore(b) ? a : b;
+  }
+
+  /// returns the later date
+  static DateTime max(DateTime a, DateTime b) {
+    return a.isAfter(b) ? a : b;
+  }
+
   /// Pass a pattern to get any numeric date format.
   ///
   /// A pattern could for example look like this:
@@ -64,7 +74,7 @@ extension DateTimeExtensions on DateTime {
     for (final match in matches) {
       final m = match.group(0)!;
       final lastIndex = replace.length;
-      final firstIndex = max(0, lastIndex - m.length);
+      final firstIndex = math.max(0, lastIndex - m.length);
       pattern = pattern.replaceAll(
         m,
         replace

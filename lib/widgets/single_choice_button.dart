@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_utils/widgets/single_choice_button.dart';
 
-class MultiChoiceButton extends StatefulWidget {
-  const MultiChoiceButton({
+class SingleChoiceButton extends StatefulWidget {
+  const SingleChoiceButton({
     this.onChanged,
     required this.items,
+    this.initialValue = 0,
     this.selectedBackgroundColor,
     this.unselectedBackgroundColor,
     this.unselectedForegroundColor,
@@ -12,6 +12,8 @@ class MultiChoiceButton extends StatefulWidget {
     this.itemPadding,
     super.key,
   });
+
+  final int initialValue;
   final List<MultiChoiceButtonItem> items;
   final Color? unselectedBackgroundColor;
   final Color? selectedBackgroundColor;
@@ -19,24 +21,28 @@ class MultiChoiceButton extends StatefulWidget {
   final Color? selectedForegroundColor;
   final EdgeInsetsGeometry? itemPadding;
 
-  final void Function(List<int> values)? onChanged;
+  final void Function(int value)? onChanged;
 
   @override
-  State<MultiChoiceButton> createState() => _MultiChoiceButtonState();
+  State<SingleChoiceButton> createState() => _SingleChoiceButtonState();
 }
 
-class _MultiChoiceButtonState extends State<MultiChoiceButton> {
+class _SingleChoiceButtonState extends State<SingleChoiceButton> {
   List<MultiChoiceButtonItem> get items => widget.items;
-  Set<int> selected = {};
+  int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    selectedIndex = widget.initialValue >= items.length
+        ? 0
+        : widget.initialValue;
   }
 
   @override
   void setState(VoidCallback fn) {
     super.setState(fn);
+    widget.onChanged?.call(selectedIndex);
   }
 
   @override
@@ -47,11 +53,7 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
             (item) => OutlinedButton(
               onPressed: () {
                 setState(() {
-                  final index = items.indexOf(item);
-                  _isSelected(index)
-                      ? selected.remove(index)
-                      : selected.add(index);
-
+                  selectedIndex = items.indexOf(item);
                   item.onSelected?.call();
                 });
               },
@@ -63,12 +65,12 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
                     end: items.last == item ? Radius.circular(100) : null,
                   ),
                 ),
-                backgroundColor: _isSelected((items.indexOf(item)))
+                backgroundColor: items.indexOf(item) == selectedIndex
                     ? widget.selectedBackgroundColor ??
                           Theme.of(context).colorScheme.primary
                     : widget.unselectedBackgroundColor ??
                           Theme.of(context).colorScheme.onPrimary,
-                foregroundColor: _isSelected((items.indexOf(item)))
+                foregroundColor: items.indexOf(item) == selectedIndex
                     ? widget.selectedForegroundColor ??
                           Theme.of(context).colorScheme.onSecondary
                     : widget.selectedForegroundColor ??
@@ -80,6 +82,10 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
           .toList(),
     );
   }
+}
 
-  bool _isSelected(int index) => selected.contains(index);
+class MultiChoiceButtonItem {
+  MultiChoiceButtonItem({this.child, this.onSelected});
+  final Widget? child;
+  final void Function()? onSelected;
 }

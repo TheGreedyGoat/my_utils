@@ -3,9 +3,6 @@
 import 'package:my_utils/utility/enums/months.dart';
 part 'german.dart';
 
-/// The currently displayed language
-Language currentLanguage = german;
-
 /// Language pack
 ///
 /// variable names should either be the exact english phrase (for single words/ short phrases)

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:my_utils/utility/enums/months.dart';
+import 'package:my_utils/utility/enums/weekdays.dart';
 part 'german.dart';
 
 /// Language pack
@@ -76,6 +77,7 @@ class Language {
     required this.month,
     required this.monthsPlural,
     required this.isRequired,
+    required this.weekdayNames,
   });
 
   Language.from(Language lang)
@@ -115,6 +117,7 @@ class Language {
         month: lang.month,
         monthsPlural: lang.monthsPlural,
         isRequired: lang.isRequired,
+        weekdayNames: lang.weekdayNames,
       );
 
   // final String assignedTags;
@@ -137,6 +140,7 @@ class Language {
   final String month;
   final String monthsPlural;
   final Map<Month, String> monthNames;
+  final Map<Weekday, String> weekdayNames;
   final String mrs;
   final String mr;
   final String prename, surname;

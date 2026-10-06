@@ -57,4 +57,13 @@ const german = Language(
   month: 'Monat',
   monthsPlural: 'Monate',
   errorOccured: 'Etwas ist schief gelaufen',
+  weekdayNames: {
+    .monday: 'Montag',
+    .tuesday: 'Dienstag',
+    .wednesday: 'Mittwoch',
+    .thursday: 'Donnerstag',
+    .friday: 'Freitag',
+    .saturday: 'Samstag',
+    .sunday: 'Sonntag',
+  },
 );

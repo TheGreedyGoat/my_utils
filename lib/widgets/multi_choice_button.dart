@@ -17,7 +17,7 @@ class MultiChoiceButton<T> extends StatefulWidget {
   });
 
   final bool singleChoice;
-  final List<MultiChoiceButtonItem> items;
+  final List<MultiChoiceButtonItem<T>> items;
   final Color? unselectedBackgroundColor;
   final Color? selectedBackgroundColor;
   final Color? unselectedForegroundColor;

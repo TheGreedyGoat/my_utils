@@ -5,6 +5,7 @@ class MultiChoiceButton extends StatefulWidget {
   const MultiChoiceButton({
     this.onChanged,
     required this.items,
+    this.selected,
     this.selectedBackgroundColor,
     this.unselectedBackgroundColor,
     this.unselectedForegroundColor,
@@ -13,6 +14,7 @@ class MultiChoiceButton extends StatefulWidget {
     super.key,
   });
   final List<MultiChoiceButtonItem> items;
+  final Set<int>? selected;
   final Color? unselectedBackgroundColor;
   final Color? selectedBackgroundColor;
   final Color? unselectedForegroundColor;
@@ -27,11 +29,12 @@ class MultiChoiceButton extends StatefulWidget {
 
 class _MultiChoiceButtonState extends State<MultiChoiceButton> {
   List<MultiChoiceButtonItem> get items => widget.items;
-  Set<int> selected = {};
+  late Set<int> selected;
 
   @override
   void initState() {
     super.initState();
+    selected = widget.selected ?? {};
   }
 
   @override

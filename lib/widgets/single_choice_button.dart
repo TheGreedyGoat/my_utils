@@ -1,91 +1,98 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class SingleChoiceButton extends StatefulWidget {
-  const SingleChoiceButton({
-    this.onChanged,
-    required this.items,
-    this.initialValue = 0,
-    this.selectedBackgroundColor,
-    this.unselectedBackgroundColor,
-    this.unselectedForegroundColor,
-    this.selectedForegroundColor,
-    this.itemPadding,
-    super.key,
-  });
+// class SingleChoiceButton extends StatefulWidget {
+//   const SingleChoiceButton({
+//     this.onChanged,
+//     required this.items,
+//     this.initialValue = 0,
+//     this.selectedBackgroundColor,
+//     this.unselectedBackgroundColor,
+//     this.unselectedForegroundColor,
+//     this.selectedForegroundColor,
+//     this.itemPadding,
+//     super.key,
+//   });
 
-  final int initialValue;
-  final List<MultiChoiceButtonItem> items;
-  final Color? unselectedBackgroundColor;
-  final Color? selectedBackgroundColor;
-  final Color? unselectedForegroundColor;
-  final Color? selectedForegroundColor;
-  final EdgeInsetsGeometry? itemPadding;
+//   final int initialValue;
+//   final List<MultiChoiceButtonItem> items;
+//   final Color? unselectedBackgroundColor;
+//   final Color? selectedBackgroundColor;
+//   final Color? unselectedForegroundColor;
+//   final Color? selectedForegroundColor;
+//   final EdgeInsetsGeometry? itemPadding;
 
-  final void Function(int value)? onChanged;
+//   final void Function(int value)? onChanged;
 
-  @override
-  State<SingleChoiceButton> createState() => _SingleChoiceButtonState();
-}
+//   @override
+//   State<SingleChoiceButton> createState() => _SingleChoiceButtonState();
+// }
 
-class _SingleChoiceButtonState extends State<SingleChoiceButton> {
-  List<MultiChoiceButtonItem> get items => widget.items;
-  int selectedIndex = 0;
+// class _SingleChoiceButtonState extends State<SingleChoiceButton> {
+//   List<MultiChoiceButtonItem> get items => widget.items;
+//   int selectedIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    selectedIndex = widget.initialValue >= items.length
-        ? 0
-        : widget.initialValue;
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     selectedIndex = widget.initialValue >= items.length
+//         ? 0
+//         : widget.initialValue;
+//   }
 
-  @override
-  void setState(VoidCallback fn) {
-    super.setState(fn);
-    widget.onChanged?.call(selectedIndex);
-  }
+//   @override
+//   void setState(VoidCallback fn) {
+//     super.setState(fn);
+//     widget.onChanged?.call(selectedIndex);
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: items
-          .map(
-            (item) => OutlinedButton(
-              onPressed: () {
-                setState(() {
-                  selectedIndex = items.indexOf(item);
-                  item.onSelected?.call();
-                });
-              },
-              style: OutlinedButton.styleFrom(
-                padding: widget.itemPadding,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.horizontal(
-                    start: items.first == item ? Radius.circular(100) : null,
-                    end: items.last == item ? Radius.circular(100) : null,
-                  ),
-                ),
-                backgroundColor: items.indexOf(item) == selectedIndex
-                    ? widget.selectedBackgroundColor ??
-                          Theme.of(context).colorScheme.primary
-                    : widget.unselectedBackgroundColor ??
-                          Theme.of(context).colorScheme.onPrimary,
-                foregroundColor: items.indexOf(item) == selectedIndex
-                    ? widget.selectedForegroundColor ??
-                          Theme.of(context).colorScheme.onSecondary
-                    : widget.selectedForegroundColor ??
-                          Theme.of(context).colorScheme.secondary,
-              ),
-              child: item.child,
-            ),
-          )
-          .toList(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: items
+//           .map(
+//             (item) => OutlinedButton(
+//               onPressed: () {
+//                 setState(() {
+//                   selectedIndex = items.indexOf(item);
+//                   item.onSelected?.call();
+//                 });
+//               },
+//               style: OutlinedButton.styleFrom(
+//                 padding: widget.itemPadding,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: BorderRadiusGeometry.horizontal(
+//                     start: items.first == item ? Radius.circular(100) : null,
+//                     end: items.last == item ? Radius.circular(100) : null,
+//                   ),
+//                 ),
+//                 backgroundColor: items.indexOf(item) == selectedIndex
+//                     ? widget.selectedBackgroundColor ??
+//                           Theme.of(context).colorScheme.primary
+//                     : widget.unselectedBackgroundColor ??
+//                           Theme.of(context).colorScheme.onPrimary,
+//                 foregroundColor: items.indexOf(item) == selectedIndex
+//                     ? widget.selectedForegroundColor ??
+//                           Theme.of(context).colorScheme.onSecondary
+//                     : widget.selectedForegroundColor ??
+//                           Theme.of(context).colorScheme.secondary,
+//               ),
+//               child: item.child,
+//             ),
+//           )
+//           .toList(),
+//     );
+//   }
+// }
 
-class MultiChoiceButtonItem {
-  MultiChoiceButtonItem({this.child, this.onSelected});
-  final Widget? child;
-  final void Function()? onSelected;
-}
+// class MultiChoiceButtonItem<T> {
+//   MultiChoiceButtonItem({
+//     this.child,
+//     this.onSelected,
+//     this.onDeselected,
+//     required this.value,
+//   });
+//   final T value;
+//   final Widget? child;
+//   final void Function(T value)? onSelected;
+//   final void Function(T value)? onDeselected;
+// }

@@ -1,40 +1,59 @@
-import 'package:flutter/material.dart';
-import 'package:my_utils/widgets/single_choice_button.dart';
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
-class MultiChoiceButton extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:my_utils/widgets/multi_choice_button_item.dart';
+
+class MultiChoiceButton<T> extends StatefulWidget {
   const MultiChoiceButton({
     this.onChanged,
     required this.items,
-    this.selected,
     this.selectedBackgroundColor,
     this.unselectedBackgroundColor,
     this.unselectedForegroundColor,
     this.selectedForegroundColor,
     this.itemPadding,
+    this.singleChoice = false,
     super.key,
   });
+
+  final bool singleChoice;
   final List<MultiChoiceButtonItem> items;
-  final Set<int>? selected;
   final Color? unselectedBackgroundColor;
   final Color? selectedBackgroundColor;
   final Color? unselectedForegroundColor;
   final Color? selectedForegroundColor;
   final EdgeInsetsGeometry? itemPadding;
 
-  final void Function(List<int> values)? onChanged;
+  final void Function(List<T> values)? onChanged;
 
   @override
-  State<MultiChoiceButton> createState() => _MultiChoiceButtonState();
+  State<MultiChoiceButton> createState() => _MultiChoiceButtonState<T>();
 }
 
-class _MultiChoiceButtonState extends State<MultiChoiceButton> {
+class _MultiChoiceButtonState<T> extends State<MultiChoiceButton> {
   List<MultiChoiceButtonItem> get items => widget.items;
-  late Set<int> selected;
+  List<T> get values => items
+      .map<T>(
+        (item) => item.value,
+      )
+      .toList();
+  late Set<T> selected;
 
   @override
   void initState() {
     super.initState();
-    selected = widget.selected ?? {};
+    selected = items
+        .where(
+          (element) => element.initiallySelected,
+        )
+        .map<T>(
+          (e) => e.value,
+        )
+        .toSet();
+    assert(
+      !widget.singleChoice || selected.length <= 1,
+      'When setting single choice, only one item can be selected!',
+    );
   }
 
   @override
@@ -45,44 +64,45 @@ class _MultiChoiceButtonState extends State<MultiChoiceButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: items
-          .map(
-            (item) => OutlinedButton(
-              onPressed: () {
-                setState(() {
-                  final index = items.indexOf(item);
-                  _isSelected(index)
-                      ? selected.remove(index)
-                      : selected.add(index);
-
-                  item.onSelected?.call();
-                });
-              },
-              style: OutlinedButton.styleFrom(
-                padding: widget.itemPadding,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.horizontal(
-                    start: items.first == item ? Radius.circular(100) : null,
-                    end: items.last == item ? Radius.circular(100) : null,
-                  ),
-                ),
-                backgroundColor: _isSelected((items.indexOf(item)))
-                    ? widget.selectedBackgroundColor ??
-                          Theme.of(context).colorScheme.primary
-                    : widget.unselectedBackgroundColor ??
-                          Theme.of(context).colorScheme.onPrimary,
-                foregroundColor: _isSelected((items.indexOf(item)))
-                    ? widget.selectedForegroundColor ??
-                          Theme.of(context).colorScheme.onSecondary
-                    : widget.selectedForegroundColor ??
-                          Theme.of(context).colorScheme.secondary,
+      children: items.map((item) {
+        final isSelected = selected.contains(item.value);
+        return OutlinedButton(
+          onPressed: () {
+            setState(() {
+              toggleSelected(item.value);
+              widget.onChanged?.call(selected.toList());
+            });
+          },
+          style: OutlinedButton.styleFrom(
+            padding: widget.itemPadding,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.horizontal(
+                start: items.first == item ? Radius.circular(100) : null,
+                end: items.last == item ? Radius.circular(100) : null,
               ),
-              child: item.child,
             ),
-          )
-          .toList(),
+            backgroundColor: isSelected
+                ? widget.selectedBackgroundColor ??
+                      Theme.of(context).colorScheme.primary
+                : widget.unselectedBackgroundColor ??
+                      Theme.of(context).colorScheme.onPrimary,
+            foregroundColor: isSelected
+                ? widget.selectedForegroundColor ??
+                      Theme.of(context).colorScheme.onSecondary
+                : widget.selectedForegroundColor ??
+                      Theme.of(context).colorScheme.secondary,
+          ),
+          child: item.child,
+        );
+      }).toList(),
     );
   }
 
-  bool _isSelected(int index) => selected.contains(index);
+  void toggleSelected(T value) {
+    if (widget.singleChoice) {
+      selected = {value};
+    } else {
+      selected.contains(value) ? selected.remove(value) : selected.add(value);
+    }
+  }
 }

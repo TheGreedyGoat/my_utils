@@ -28,7 +28,7 @@ class MultiChoiceButton<T> extends StatefulWidget {
   State<MultiChoiceButton> createState() => _MultiChoiceButtonState<T>();
 }
 
-class _MultiChoiceButtonState<T> extends State<MultiChoiceButton> {
+class _MultiChoiceButtonState<T> extends State<MultiChoiceButton<T>> {
   List<MultiChoiceButtonItem> get items => widget.items;
   List<T> get values => items
       .map<T>(

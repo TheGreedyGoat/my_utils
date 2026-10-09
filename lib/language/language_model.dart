@@ -78,6 +78,7 @@ class Language {
     required this.monthsPlural,
     required this.isRequired,
     required this.weekdayNames,
+    required this.atLeastOneRequired,
   });
 
   Language.from(Language lang)
@@ -118,6 +119,7 @@ class Language {
         monthsPlural: lang.monthsPlural,
         isRequired: lang.isRequired,
         weekdayNames: lang.weekdayNames,
+        atLeastOneRequired: lang.atLeastOneRequired,
       );
 
   // final String assignedTags;
@@ -162,6 +164,7 @@ class Language {
   final String errorOccured;
 
   final String isRequired;
+  final String atLeastOneRequired;
 
   // final String vatID;
 

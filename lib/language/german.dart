@@ -66,4 +66,5 @@ const german = Language(
     .saturday: 'Samstag',
     .sunday: 'Sonntag',
   },
+  atLeastOneRequired: 'Mindestens 1 erforderlich',
 );

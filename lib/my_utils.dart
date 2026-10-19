@@ -8,4 +8,8 @@ export 'widgets/widget_functionality/conditional_wrapper.dart';
 export 'utility/formatters.dart';
 export 'utility/money_converter.dart';
 export 'utility/class_extensions/date_time_extensions.dart';
+export 'utility/units/unit.dart';
+export 'utility/units/kilo_watt_hour.dart';
+export 'utility/units/euro.dart';
+export 'utility/percent.dart';
 export 'language/language_model.dart';

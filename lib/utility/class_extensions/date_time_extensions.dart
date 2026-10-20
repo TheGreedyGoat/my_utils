@@ -118,10 +118,7 @@ extension DateTimeExtensions on DateTime {
       case 12:
         return 31;
       case 2:
-        return this.year % 4 == 0 &&
-                (this.year % 100 != 0 || this.year % 400 == 0)
-            ? 29
-            : 28;
+        return this.daysOfYear == 365 ? 29 : 28;
       default:
         return 30;
     }
@@ -131,5 +128,17 @@ extension DateTimeExtensions on DateTime {
     return this.year % 4 == 0 && (this.year % 100 != 0 || this.year % 400 == 0)
         ? 364
         : 365;
+  }
+
+  /// Returns DateTime.now() -1 year
+  static DateTime oneYearAgo() {
+    final now = DateTime.now();
+    return now.copyWith(year: now.year - 1);
+  }
+
+  /// Returns DateTime.now()+1 year
+  static DateTime oneYearAhead() {
+    final now = DateTime.now();
+    return now.copyWith(year: now.year + 1);
   }
 }

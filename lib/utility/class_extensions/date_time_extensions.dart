@@ -131,14 +131,12 @@ extension DateTimeExtensions on DateTime {
   }
 
   /// Returns DateTime.now() -1 year
-  static DateTime oneYearAgo() {
-    final now = DateTime.now();
-    return now.copyWith(year: now.year - 1);
+  DateTime oneYearAgo() {
+    return this.copyWith(year: this.year - 1);
   }
 
   /// Returns DateTime.now()+1 year
-  static DateTime oneYearAhead() {
-    final now = DateTime.now();
-    return now.copyWith(year: now.year + 1);
+  DateTime oneYearAhead() {
+    return this.copyWith(year: this.year + 1);
   }
 }

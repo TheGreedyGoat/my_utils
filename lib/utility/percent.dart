@@ -14,7 +14,7 @@ class Percent {
 
   /// returns [target], multiplied by this percentage
   num apply(num target) {
-    return target * 1 / permille;
+    return target * permille / 1000;
   }
 
   /// returns [target] with the corresponding percent value added
